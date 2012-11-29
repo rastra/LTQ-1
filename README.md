@@ -47,7 +47,7 @@ Adapun fitur-fitur yang dimiliki Nivo Slider antara lain:
 <li>Bebas untuk digunakan </li>
 <li>Responsif</li></ul>
 
-Dari segi User Interface, Usability dan User Experience sudah baik dikarenakan Team Developer telah mengikuti dan menganlisa tiap website pada matakuliah
+Dari segi User Interface, Usability dan User Experience sudah baik dikarenakan Team Developer telah mengikuti dan menganalisa tiap website pada matakuliah
 Interaksi Manusia dan Komputer yang dibimbing oleh Bapak M. Jauharul Fuadi, S.T., M.T.
 
 Demo Website LTQ ==> http://ltq.zz.mu 
