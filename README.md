@@ -25,7 +25,7 @@ Team Developer LTQ:
 
 Deskripsi Teknis:
 Pengembangan LTQ (Learn To Quiz) ini dibangun dengan menggunakan teknologi web seperti HTML, CSS, Jquery dan Javascript.
-Beberapa deskripsi dari javascript versi yang digunakan pada LTQ antara lain:
+Beberapa deskripsi dari javascript yang digunakan pada LTQ antara lain:
 <ul>
 <li>Javascript didesain untuk menambah interaktif pada halaman HTML.</li>
 <li>Javascript digunakan untuk memberikan feedback atas hasil evaluasi dari soal pilihan ganda.</li>
@@ -33,7 +33,7 @@ Beberapa deskripsi dari javascript versi yang digunakan pada LTQ antara lain:
 <li>Javascript biasanya disimpan langsung didalam halaman HTML.</li>
 <li>Tentunya, Setiap orang dapat menggunakan javascript tanpa harus membeli lisensi.</li></ul>
 
-Untuk pembuatan header kami memanfaatkan Jquery "Nivo Slider" yang merupakan Slide Gambar Jquery paling populer di dunia dan gratis.
+Untuk pembuatan header kami memanfaatkan Jquery 1.4.3 "Nivo Slider" yang merupakan Slide Gambar Jquery paling populer di dunia dan gratis.
 Adapun fitur-fitur yang dimiliki Nivo Slider antara lain:
 <ul>
 <li>16 efek transisi yang unik</li>
