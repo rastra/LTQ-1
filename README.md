@@ -2,7 +2,7 @@ LTQ
 ===
 
 <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kuis LTQ merupakan sebuah kuis dalam bentuk web untuk memenuhi mata kuliah Interaksi Manusia Komputer yang 
-di bimbing oleh Bapak Jauharul Fuadi, S.T.,M.T. LTQ adalah kuis untuk kelas XII SMK pada mata pelajaran KKPI khususnya
+di bimbing oleh Bapak M. Jauharul Fuadi, S.T.,M.T. LTQ adalah kuis untuk kelas XII SMK pada mata pelajaran KKPI khususnya
 pada materi mengoperasikan web browser.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menu-menu yang tersedia pada LTQ yaitu menu Home, Learn, Quiz dan About. Pada menu Home pengguna dapat 
 langsung mengetahui isi yang disediakan dalam web kuis ini. Tampilan halaman utama disajikan dalam satu halaman yang 
