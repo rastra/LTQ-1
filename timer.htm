@@ -1,0 +1,45 @@
+<left>
+<div id='timerbox'>
+ 
+<table width=150><tr><td align=center>&nbsp;Jam</td><td align=center>&nbsp; Menit</td><td align=center> &nbsp;Detik</td></tr></table>
+<div id='timerticking'><div id='tick'><p class='tickvalue' id='tickhours'>00</p><p class='tickvalue' id='tickminutes'>00</p><p class='tickvalue' id='tickseconds'>00</p></div></div>
+<div id='timercontrol'><center><a href='#' onclick=start() class='startstop'>Start</a> <a href='#' onclick=pause() class='startstop'>Stop</a></center></div>
+</div>
+</left>
+
+
+<style>
+body{} 
+div#timerticking{width:150px;height:60px;text-align:left;}
+div#timercontrol{width:150px;height:50px;} 
+p.tickvalue{float:left;font-size:20px;height:25px;width:25px;padding:10px;margin:2px;background:#214052;color:white;}
+a.startstop{text-decoration:none;background:#255470;border:none;padding:5px;margin:2px;color:white;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;-moz-box-shadow:inset 1px 1px 8px 1px #2E5E7A;-webkit-box-shadow:inset 1px 1px 8px 1px #2E5E7A;box-shadow:1px 1px 8px 1px #2E5E7A;}
+a.startstop:hover{-moz-box-shadow:inset 1px 1px 10px 1px #2E5E7A;-webkit-box-shadow:inset 1px 1px 10px 1px #2E5E7A;box-shadow:1px 1px 10px 1px #2E5E7A;}
+</style>
+
+<script language='Javascript'>
+var h=00;var m=00;var s=00;
+var mup,hup;
+var op='start';
+var timr;
+var timrstatus=true;
+function start(){if(timrstatus==true){timr=setInterval("ticking()",1000);timrstatus=false;}}
+function pause(){clearInterval(timr);timrstatus=true;}
+function stop(){clearInterval(timr);h=00;m=00;s=00;document.getElementById('tickhours').innerHTML=h;document.getElementById('tickminutes').innerHTML=m;document.getElementById('tickseconds').innerHTML=s;timrstatus=true;}
+
+function ticking()
+{
+if(s<59){s=s+01;mup=false;hup=false;}
+else if(s==59){s=00;mup=true;}
+
+if(mup==true && m<59){m=m+01;}
+else if(mup==true && m==59){m=00;hup=true;}
+
+if(hup==true && h<23){h=h+01;}
+else if(hup==true && h==23){h=00;}
+
+document.getElementById('tickhours').innerHTML=h;
+document.getElementById('tickminutes').innerHTML=m;
+document.getElementById('tickseconds').innerHTML=s;
+}
+</script>

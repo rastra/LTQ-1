@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>LTQ : Quiz</title>
+
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+	<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <!--[if IE 6]><link rel="stylesheet" href="style.ie6.css" type="text/css" media="screen" /><![endif]-->
+    <!--[if IE 7]><link rel="stylesheet" href="style.ie7.css" type="text/css" media="screen" /><![endif]-->
+
+    <script type="text/javascript" src="javascript/script.js"></script>
+	<!--nivo slider -->
+	<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
+	<script src="javascript/jquery-1.4.3.min.js" type="text/javascript"></script>
+	<script src="javascript/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(window).load(function() {
+    $('#slider').nivoSlider();
+});
+</script>
+	<!--nivos slider- -->
+	<script language="JavaScript">
+	
+<!-- Hide this script from incompatible browsers.
+
+
+function getQuestions() {
+
+    var number_of_quizzes = 1
+
+//---------------------------------------------------------------------
+    var testdata = "javascript/questions-"
+    testdata += Math.floor(Math.random() * number_of_quizzes + 1)+".js"
+    document.write("<script language='JavaScript' src="+testdata+"> ")
+    document.write("<\/script>")
+  return
+}
+function make_2d_array(n, m) {
+  var a = new Array(n);
+  for (var j=1; j<=n; j++) {
+    a[j] = new Array(m);
+  }
+  return a
+}
+function getSelection(elem,len) {
+// finds which true or false or which multiple choice option was selected
+  var limit = elem + len;
+  for (var i=elem; i<limit; i++) {
+    if (document.forms[0].elements[i].checked) {
+    return i-elem+1
+    }
+  }
+  return 0  
+}
+function gradeReport (form,nTF,aTF,nmulti,jawaban) {
+  var init, limit, select, ans, temp;
+  var ncorrect = 0;
+  var question = 0;
+  if (document.forms[0].elements[1].value == "") {
+    alert("PERINGATAN! Nama Anda belum diisi. Untuk Kepentingan Pencatatan, "
+        + "mohon masukkan Nama Lengkap Anda.")
+    document.forms[0].elements[1].value = 
+      prompt("Masukkan Nama anda disini !","");
+    return
+  }
+  if (document.forms[0].elements[2].value == "") {
+    alert("PERINGATAN! Nomor Absen Anda belum diisi "
+        + "mohon masukkan Nomor Absen Anda. Terima Kasih ")
+    document.forms[0].elements[2].value = 
+      prompt("Masukkan Nomor Absen Anda disini !","");
+    return
+  }
+  var newWin = 
+    window.open("","quizWin",
+      "scrollbars,resizable,height=200,width=440,toolbar,status,menubar")
+  newWin.document.close();
+  newWin.document.open();
+  if (newWin != null) {
+    var msg = "<HTML><HEAD><TITLE>Hasil Kuis Anda</TITLE></HEAD>"
+    msg += "<BODY bgcolor='#FFFFFF'>"
+    msg += "<center><H1>HASIL KUIS ANDA</H1></center><p>"
+	msg +="<table><tr>"
+    msg += "<td><b>Nama Siswa</b></td> <td>:</td><td><b>"
+    msg += document.forms[0].elements[1].value+"</b></td></tr>";
+    msg += "<tr><td><b>Nomor Absen</b> </td><td>:</td><td><b>"
+    msg += document.forms[0].elements[2].value+"</b></td></tr></table><hr><br/> Berikut ini uraian dari hasil jawaban Kuiz Anda : <br/><br/>";
+    if (nTF > 0) {
+      init = 3; // equals the number of non-question data fields
+                // at the beginning of the quiz form
+      limit = init + 2 * nTF;
+      for (var i=init; i<limit; i=i+2) {
+        question = question+1;
+        select = getSelection(i,2);
+        if (select == 0) {
+          msg += question+". "+qTF[question]+"  ";
+          ans = "";
+        }
+        else {
+          msg += question+". "+qTF[question]+"  "
+          ans = document.forms[0].elements[select+i-1].value;
+        }
+        if (ans != aTF[question]) {
+          temp = "<i>" +ans +"</i>"+ " <img src='images/salah.png'/>";
+          msg += "<font color=red>"
+          msg += temp+"</font><p>"
+        }
+        else {
+          ncorrect = ncorrect + 1;
+          temp= "<i>" +ans +"</i>" + "  <img src='images/benar.png'/>"
+		  msg += "<font color=green>"
+          msg += temp+"</font><p>"
+        }
+      }
+    }
+    if (nmulti > 0) {
+      init = 3 + 2 * nTF;
+      limit = init + nchoices * nmulti;
+      question = question - nTF;
+      for (var i=init; i<limit; i=i+nchoices) {
+        question = question+1;
+        select = getSelection(i,nchoices);
+        if (select == 0) {
+          msg += (question+nTF)+". "+pertanyaan[question]+"  ";
+          ans = "";
+        }
+        else {
+          msg += (question+nTF)+". "+pertanyaan[question]+"  "
+          ans = document.forms[0].elements[select+i-1].value;
+        }
+        len_ans = ans.length
+        if (len_ans > 3) {
+          if (ans.substring(len_ans-4,len_ans) == "<br>") {
+            ans = ans.substring(0,len_ans-4)
+          }
+        }
+        if (select != jawaban[question]) {
+         temp = "<i>" +ans +"</i>"+ " <img src='images/salah.png'/>";
+          msg += "<font color=red>"
+          msg += temp+"</font><p>"
+        }
+        else {
+          ncorrect = ncorrect + 1;
+         temp= "<i>" +ans +"</i>" + "  <img src='images/benar.png'/>"
+		  msg += "<font color=green>"
+          msg += temp+"</font><p>"
+        }
+      }
+    }
+    ans1 = ncorrect
+	ans2 = ((nTF + nmulti)-ncorrect)
+	ans3 = ((ncorrect/(nTF + nmulti))*100)
+    document.forms[0].elements[0].value = ans1;
+	document.forms[0].elements[0].value = ans2;
+	msg+="<center><table width='300' height='10'style='font-weight:bold' background='images/bbg.png'><tr><td><center><font size='4' color='#3a8a0a'>Benar</font></center></td><td><center><font size='4' color='#fb3d3d'>Salah</font></center></td><td><center><font size='4'>Nilai</font></center></td></tr>"
+    msg += "<tr><td><center><font size='4' color='#3a8a0a'>"+ans1+"</font></center></td><td><center><font size='4' color='#fb3d3d'>"+ans2+"</font></center></td><td><center><font size='4'>"+ans3+"</font></center></td></tr></table></center></BODY></HTML>"
+    newWin.document.write(msg)
+    newWin.document.close()
+    form.submit();
+    newWin.focus();
+  }
+  return
+}
+
+<!-- -->
+</script>
+</head>
+<body>
+
+<div id="art-page-background-simple-gradients">
+        <div id="art-page-background-gradients"></div>
+    </div>
+	
+    <div id="art-main">
+	<div style="display:scroll; position:fixed; margin-top:300px">
+<iframe src="timer.htm" scrolling="auto" frameBorder="0" width="180" height="200" style="margin-left:20px"/></iframe>
+</div>
+        <div class="art-sheet">
+            <div class="art-sheet-tl"></div>
+            <div class="art-sheet-tr"></div>
+            <div class="art-sheet-bl"></div>
+            <div class="art-sheet-br"></div>
+            <div class="art-sheet-tc"></div>
+            <div class="art-sheet-bc"></div>
+            <div class="art-sheet-cl"></div>
+            <div class="art-sheet-cr"></div>
+            <div class="art-sheet-cc"></div>
+            <div class="art-sheet-body">
+                <div class="art-nav">
+                	<div class="l"></div>
+                	<div class="r"></div>
+                	<ul class="art-menu">
+                		<li>
+                			<a href="index.html" class="active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
+                		</li>
+                		<li>
+                			<a href="learn.html"><span class="l"></span><span class="r"></span><span class="t">Learn</span></a>
+                		</li>
+                			<li>
+                			<a href="kuis.html"><span class="l"></span><span class="r"></span><span class="t">Quiz</span></a>
+                		</li>
+                			
+                		<li>
+                			<a href="about.html"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
+                		</li>
+                	</ul>
+                </div>
+				
+               <div class="art-header">
+                    <div class="art-header-jpeg"></div>
+                 <div id="slider">
+				    <img src="slide/header1.jpg" alt="" />
+				    <img src="slide/header2.jpg" alt="" />
+				    <img src="slide/header3.jpg" alt="" />
+					</div>
+                    
+                </div>
+				
+                <div class="art-content-layout">
+                    <div class="art-content-layout-row">
+                        <div class="art-layout-cell art-content">
+                            <div class="art-post">
+                                <div class="art-post-tl"></div>
+                                <div class="art-post-tr"></div>
+                                <div class="art-post-bl"></div>
+                                <div class="art-post-br"></div>
+                                <div class="art-post-tc"></div>
+                                <div class="art-post-bc"></div>
+                                <div class="art-post-cl"></div>
+                                <div class="art-post-cr"></div>
+                                <div class="art-post-cc"></div>
+                                <div class="art-post-body">
+                            <div class="art-post-inner art-article">
+                                            <div class="art-postmetadataheader">
+                                                <h2 class="art-postheader">
+                                                    <strong>Ok., Let's do this quiz !</strong> 
+                                                </h2>
+                                            </div>
+                                            <div class="art-postcontent">
+                                                <!-- article-content -->
+                                                <noscript>
+<hr>
+
+<p>If your browser is displaying this line of text, then it does
+not support JavaScript. To view all of the action on this page,
+use a browser than supports JavaScript. </p>
+
+<hr></noscript>
+<!-- The ACTION value below must be the directory route for the cgi script
+       on your web server that can email the form results to your email
+       account. This is followed by a "-n" and then the directory route for
+       the web page to be shown when the quiz has been submitted. This is
+       optional. However, definitely put your email address in place of 
+       rbowman@bridgewater.edu or the form will not go to you!
+     The perl script called "mailformdata" is available as a
+       resource at http://www.bridgewater.edu/cescc/acadcomp/js/ -->
+<form action=" " method="POST">
+  <input type="hidden" name="00. Grade" value="ungraded">
+  <h1 style="text-shadow:
+    1px 0px #ccc, 0px 1px #ccc,
+    2px 1px #ddd, 1px 2px #bbb,
+    3px 2px #ddd, 2px 3px #bbb,
+    4px 3px #ddd, 3px 4px #bbb, 
+    5px 4px #ddd, 4px 5px #bbb,
+    6px 5px #ddd, 5px 6px #bbb,
+    7px 6px #ddd, 6px 7px #bbb,
+    8px 7px #ddd, 7px 8px #bbb,
+    8px 8px #ddd; font-size: 50px;
+    color: #666; text-align:center; 
+    text-height:font-size;">
+    LTQ : Multiple Choice Quiz</h1>
+  
+  
+
+<hr>  
+  <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-width: 0" bordercolor="#111111" width="100%">
+    <tr>
+      <td width="150" style="border-style: none; border-width: medium"><b>Nama Siswa </b></td>
+      <td width="360" style="border-style: none; border-width: medium">: 
+      <input type="text" size="30" maxlength="50" 
+  name="01. name1"></td>
+  <td width="200"><font size="3" face="Tahoma"><b>Standar Kompetensi</b></font></td><td>:</td><td width="300"><font size="3" face="Tahoma"><b>Mengoperasikan <i>Web-Design<i></b></font></td>
+    </tr>
+    <tr>
+      <td width="150" style="border-style: none; border-width: medium"><b>Nomor Absen </b></td>
+      <td width="360" style="border-style: none; border-width: medium">: 
+      <input type="text" size="30" maxlength="50" 
+  name="02. email1"></td>
+  <td><font size="3" face="Tahoma"><b>Kompetensi Dasar</b></font></td><td>:</td><td><font size="3" face="Tahoma"><b>Mengoperasikan <i>Web-Browser</i></b></font></td>
+    </tr>
+  </table>
+  <hr>
+    <script language="JavaScript">
+    getQuestions()
+    </script>
+    <script language="JavaScript">
+<!-- Hide this script from incompatible browsers.
+
+if (nTF != 0) {
+  msg = "<h3>Answer True or False below:</h3>";
+  msg += "<TABLE border='1' cellpadding='5' width='100%'>";
+  document.write(msg);
+
+  for (var i = 1; i <= nTF; i++) {
+    var i_str = "" + i;
+      // this gnerates the correct number for the quiz question on the form
+    var f_str;
+    if (i < 8) f_str = "0" + (i + 2) + ". " + i_str + ". " + qTF[i];
+    else  f_str = "" + (i + 2) + ". " + i_str + ". " + qTF[i];
+      // this places form answers on the email after user's name and address
+    q = "<TR><TD width = '65'>"
+    q += "<INPUT TYPE='RADIO' NAME='"+f_str+"' VALUE='true'>True <br>"
+    q += "<INPUT TYPE='RADIO' NAME='"+f_str+"' VALUE='false'>False "
+    q += "</TD><TD><b>"+i_str+". "+qTF[i]+"</b></TD></TR>"
+    document.write(q);
+  }
+  document.write("</TABLE>");
+}
+
+if (nmulti != 0) {
+  msg = "<h3>Pilihlah salah satu jawaban yang paling tepat!</h3>";
+  msg += "<TABLE border='1' cellpadding='5' width='100%'>";
+  document.write(msg);
+
+  for (var i = 1; i <= nmulti; i++) {
+    var i_str = "" + (nTF + i);
+    var f_str;
+    if (i + nTF < 8) f_str = "0" + (nTF + i + 2) + ". " + i_str + ". " + pertanyaan[i];
+    else  f_str = "" + (nTF + i + 2) + ". " + i_str + ". " + pertanyaan[i];
+    q = "<TR>"
+    q += "<TD><b>"+i_str+".</b></TD><TD><b> "+pertanyaan[i]+"</b><br>"
+    for (var j = 1; j <=nchoices; j++) {
+      q += "&nbsp;&nbsp;"+"<INPUT TYPE='RADIO' NAME='"+f_str+"'"
+      q += " VALUE='"+pilihan[i][j]+"'>"+pilihan[i][j]
+    }
+    q += "<BR/></TD></TR>"
+    document.write(q);
+  }
+}
+document.write("</TABLE>");
+
+<!-- -->
+    </script>
+
+  <p align="center">
+  <script language="JavaScript">
+<!-- Hide this script from incompatible browsers.
+msg = "<input type='button' name='button' value='Score Quiz' "
+msg += "onClick='gradeReport(this.form,nTF,aTF,nmulti,jawaban)'>"
+msg += "&nbsp;&nbsp;<input type='reset' value='Reset Answer'>"
+document.write(msg)
+<!-- -->
+  </script>
+  </p>
+</form>
+<hr>
+
+
+                                                <div class="art-content-layout overview-table">
+                                                  <div class="art-content-layout-row"><!-- end cell --><!-- end cell -->
+                                                		<div class="art-layout-cell">
+                                                    <div class="overview-table-inner">
+                                                		  
+                                                
+                                                						  
+                                                          </div>
+                                               		</div><!-- end cell -->
+                                               	  </div><!-- end row -->
+                                              </div><!-- end table -->
+                                                    
+                                                <!-- /article-content -->
+  </div>
+  
+                                            <div class="cleared"></div>
+                            </div>
+                            
+                            		<div class="cleared"></div>
+                                </div>
+                            </div>
+                          <div class="art-post">
+                                <div class="art-post-tl"></div>
+                                <div class="art-post-tr"></div>
+                                <div class="art-post-bl"></div>
+                                <div class="art-post-br"></div>
+                                <div class="art-post-tc"></div>
+                                <div class="art-post-bc"></div>
+                                <div class="art-post-cl"></div>
+                                <div class="art-post-cr"></div>
+                            <div class="art-post-cc"></div>
+                          </div>
+                        </div>
+                      
+                    </div>
+                </div>
+                <div class="cleared"></div><div class="art-footer">
+                    <div class="art-footer-inner">
+                        <a href="#" class="art-rss-tag-icon" title="RSS"></a>
+                        <div class="art-footer-text">
+                           
+                                
+                                <table align="center"><tr><td>
+                                  Copyright &copy; 2012 LTQ: Learn To Quiz.</td><td width="100px">&nbsp;</td><td><a href="learn.html">Learn</a> | <a href="kuis.html">Quiz</a> | <a href="about.html">About</a></td><td width="100px">&nbsp;</td><td> Powered by <a href="http://www.rastrapermana.com">Rastra</a> | <a href="http://vertikasheaven.blogspot.com/">Vertika </a>| <a href="http://simpletoperfect.blogspot.com/">Riza</a><td></tr></table></p>
+                        </div>
+                    </div>
+                    <div class="art-footer-background"></div>
+                </div>
+        		<div class="cleared"></div>
+            </div>
+        </div>
+        <div class="cleared"></div>        
+    </div>
+    
+</body>
+</html>
