@@ -17,6 +17,146 @@
 	<script src="javascript/jquery.nivo.slider.pack.js" type="text/javascript"></script>
 
 
+<<<<<<< HEAD
+=======
+    var number_of_quizzes = 1
+
+//---------------------------------------------------------------------
+    var testdata = "javascript/questions-"
+    testdata += Math.floor(Math.random() * number_of_quizzes + 1)+".js"
+    document.write("<script language='JavaScript' src="+testdata+"> ")
+    document.write("<\/script>")
+  return
+}
+function make_2d_array(n, m) {
+  var a = new Array(n);
+  for (var j=1; j<=n; j++) {
+    a[j] = new Array(m);
+  }
+  return a
+}
+function getSelection(elem,len) {
+// finds which true or false or which multiple choice option was selected
+  var limit = elem + len;
+  for (var i=elem; i<limit; i++) {
+    if (document.forms[0].elements[i].checked) {
+    return i-elem+1
+    }
+  }
+  return 0  
+}
+function gradeReport (form,nTF,aTF,nmulti,jawaban) {
+  var init, limit, select, ans, temp;
+  var ncorrect = 0;
+  var question = 0;
+  if (document.forms[0].elements[1].value == "") {
+    alert("PERINGATAN! Nama Anda belum diisi. Untuk Kepentingan Pencatatan, "
+        + "mohon masukkan Nama Lengkap Anda.")
+    document.forms[0].elements[1].value = 
+      prompt("Masukkan Nama anda disini !","");
+    return
+  }
+  if (document.forms[0].elements[2].value == "") {
+    alert("PERINGATAN! Nomor Absen Anda belum diisi "
+        + "mohon masukkan Nomor Absen Anda. Terima Kasih ")
+    document.forms[0].elements[2].value = 
+      prompt("Masukkan Nomor Absen Anda disini !","");
+    return
+  }
+  var newWin = 
+    window.open("","quizWin",
+      "scrollbars,resizable,height=200,width=440,toolbar,status,menubar")
+  newWin.document.close();
+  newWin.document.open();
+  if (newWin != null) {
+    var msg = "<HTML><HEAD><TITLE> Hasil Kuis Anda </TITLE></HEAD>"
+    msg += "<BODY bgcolor='#FFFFFF'>"
+    msg += "<center><H1>HASIL KUIS ANDA</H1></center><p>"
+	msg +="<table><tr>"
+    msg += "<td><b>Nama Siswa</b></td> <td>:</td><td><b>"
+    msg += document.forms[0].elements[1].value+"</b></td></tr>";
+    msg += "<tr><td><b>Nomor Absen</b> </td><td>:</td><td><b>"
+    msg += document.forms[0].elements[2].value+"</b></td></tr></table><hr><br/> Berikut ini uraian dari hasil jawaban Kuiz Anda : <br/><br/>";
+    if (nTF > 0) {
+      init = 3; // equals the number of non-question data fields
+                // at the beginning of the quiz form
+      limit = init + 2 * nTF;
+      for (var i=init; i<limit; i=i+2) {
+        question = question+1;
+        select = getSelection(i,2);
+        if (select == 0) {
+          msg += question+". "+qTF[question]+"  ";
+          ans = "";
+        }
+        else {
+          msg += question+". "+qTF[question]+"  "
+          ans = document.forms[0].elements[select+i-1].value;
+        }
+        if (ans != aTF[question]) {
+          temp = "<i>" +ans +"</i>"+ " <img src='images/salah.png'/>";
+          msg += "<font color=red>"
+          msg += temp+"</font><p>"
+        }
+        else {
+          ncorrect = ncorrect + 1;
+          temp= "<i>" +ans +"</i>" + "  <img src='images/benar.png'/>"
+		  msg += "<font color=green>"
+          msg += temp+"</font><p>"
+        }
+      }
+    }
+    if (nmulti > 0) {
+      init = 3 + 2 * nTF;
+      limit = init + nchoices * nmulti;
+      question = question - nTF;
+      for (var i=init; i<limit; i=i+nchoices) {
+        question = question+1;
+        select = getSelection(i,nchoices);
+        if (select == 0) {
+          msg += (question+nTF)+". "+pertanyaan[question]+"  ";
+          ans = "";
+        }
+        else {
+          msg += (question+nTF)+". "+pertanyaan[question]+"  "
+          ans = document.forms[0].elements[select+i-1].value;
+        }
+        len_ans = ans.length
+        if (len_ans > 3) {
+          if (ans.substring(len_ans-4,len_ans) == "<br>") {
+            ans = ans.substring(0,len_ans-4)
+          }
+        }
+        if (select != jawaban[question]) {
+         temp = "<i>" +ans +"</i>"+ " <img src='images/salah.png'/>";
+          msg += "<font color=red>"
+          msg += temp+"</font><p>"
+        }
+        else {
+          ncorrect = ncorrect + 1;
+         temp= "<i>" +ans +"</i>" + "  <img src='images/benar.png'/>"
+		  msg += "<font color=green>"
+          msg += temp+"</font><p>"
+        }
+      }
+    }
+    ans1 = ncorrect
+	ans2 = ((nTF + nmulti)-ncorrect)
+	ans3 = ((ncorrect/(nTF + nmulti))*100)
+    document.forms[0].elements[0].value = ans1;
+	document.forms[0].elements[0].value = ans2;
+	msg+="<center><table width='300' height='10'style='font-weight:bold' background='images/bbg.png'><tr><td><center><font size='4' color='#3a8a0a'>Benar</font></center></td><td><center><font size='4' color='#fb3d3d'>Salah</font></center></td><td><center><font size='4'>Nilai</font></center></td></tr>"
+    msg += "<tr><td><center><font size='4' color='#3a8a0a'>"+ans1+"</font></center></td><td><center><font size='4' color='#fb3d3d'>"+ans2+"</font></center></td><td><center><font size='4'>"+ans3+"</font></center></td></tr></table></center></BODY></HTML>"
+    newWin.document.write(msg)
+    newWin.document.close()
+    form.submit();
+    newWin.focus();
+  }
+  return
+}
+
+<!-- -->
+</script>
+>>>>>>> 103fb3e6bccdc866fc5709687677280300d10b43
 </head>
 <body>
 
