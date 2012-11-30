@@ -18,13 +18,13 @@
             splashImage: 'images/start.png',
             twitterImage: 'images/share.png',
             resultComments: {
-                perfect: 'Sempurna!',
-                excellent: 'Mengagumkan!',
-                good: 'Bagus!',
-                average: 'Cukup Baik!',
-                bad: 'Mengecewakan!',
-                poor: 'Buruk',
-                worst: 'Terlalu Jelek'
+                perfect: 'Perfect!',
+                excellent: 'Excellent!',
+                good: 'Good!',
+                average: 'Average!',
+                bad: 'Bad!',
+                poor: 'Poor!',
+                worst: 'Worst!'
             }
 
         };
